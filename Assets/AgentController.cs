@@ -33,4 +33,9 @@ public class AgentController : MonoBehaviour {
             this.agent.SetDestination(hit.point);
         }
     }
+
+    public void OnCallChangeFace()
+    {
+
+    }
 }
