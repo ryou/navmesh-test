@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour {
-    public Transform target;
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -17,7 +16,21 @@ public class AgentController : MonoBehaviour {
 
     void Update()
     {
-        this.agent.SetDestination(target.position);
         this.animator.SetFloat("Speed", this.agent.velocity.sqrMagnitude);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray();
+        }
+    }
+
+    void Ray()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 10.0f))
+        {
+            this.agent.SetDestination(hit.point);
+        }
     }
 }
